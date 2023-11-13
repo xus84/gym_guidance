@@ -8,8 +8,7 @@ const Header = () => {
           <nav>
             <ul className="flex space-x-4">
               <li className="hover:underline">Home</li>
-              <li className="hover:underline">About</li>
-              <li className="hover:underline">Services</li>
+              <li className="hover:underline">Exercises</li>
               <li className="hover:underline">Contact</li>
             </ul>
           </nav>
