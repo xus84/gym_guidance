@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ExerciseCard from './ExerciseCard';
 import Header from '@/components/Header';
@@ -7,10 +7,24 @@ import Header from '@/components/Header';
 function Exercises() {
 
   const [selectedExercises, setSelectedExercises] = useState([]);
+  
 
   const handleExerciseClick = (exercise) => {
-    setSelectedExercises((prevExercises) => [...prevExercises, exercise]);
+   
+    setSelectedExercises((prevExercises) => {
+      const isAlreadySelected = prevExercises.some((selectedExercise) => selectedExercise.id === exercise.id);
+
+      if(!isAlreadySelected) {
+        return [...prevExercises, exercise];
+      } else {
+        return prevExercises.filter((e) => e.id !== exercise.id);
+      }
+    })
   };
+
+  useEffect(() => {
+    console.log(selectedExercises)
+  }, [selectedExercises])
   
 
   const exercises = [
@@ -104,16 +118,19 @@ function Exercises() {
   return (
     <div className="bg-red-200">
       <Header />
-      <div className="grid grid-cols-5 gap-4 p-4">
+      <div>
+      <h2 className='text-2xl font-bold mt-2 text-center'>Create your own routine and click the timer</h2>
+      </div>
+      <div className="grid grid-cols-5 gap-4 p-3">
         {exercises.map((exercise, index) => (
-          <div key={index} onClick={() => handleExerciseClick(exercise)}>
-          <ExerciseCard  exercise={exercise}/>
+          <div key={index}>
+          <ExerciseCard  exercise={exercise} onSelect={handleExerciseClick}/>
           </div>
         ))}
       </div>
 
       <div className="mt-8 p-4">     
-      <h2 className="text-2xl font-bold mb-4">Selected Exercises:</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Selected Exercises</h2>
        <ul className="text-1xl font-semibold list-disc pl-8">{selectedExercisesList}
         </ul>
       </div>
