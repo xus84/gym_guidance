@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 {/* 
 ExerciseCard component displays an exercise card with name, description, and image.
@@ -10,7 +10,7 @@ Props:
 */}
 
  
-const ExerciseCard = ({ exercise, onSelect }) => {
+const ExerciseCard = ({ exercise, onSelect, selectedExercises}) => {
   const { name, description, image } = exercise;
   const [isClicked, setIsClicked] = useState();
   
@@ -19,7 +19,9 @@ const ExerciseCard = ({ exercise, onSelect }) => {
     onSelect(exercise);
   };
 
-
+  useEffect(() => {
+    setIsClicked(selectedExercises.some((selectedExercise) => selectedExercise.id === exercise.id));
+  }, [selectedExercises]);
 
   return (
     
