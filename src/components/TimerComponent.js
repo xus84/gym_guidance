@@ -4,20 +4,25 @@ function TimerComponent({ selectedExercises }) {
  
   const [duration, setDuration] = useState(0)
   const [isRunning, setIsRunning] = useState(false);
+  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
 
   useEffect(() => {
     let intervalId;
 
-    if(isRunning){
+    if (isRunning) {
       intervalId = setInterval(() => {
         setDuration((prevDuration) => prevDuration - 1);
+
+        if (duration % 30 === 0) {
+          setCurrentExerciseIndex((prevIndex) => (prevIndex + 1) % selectedExercises.length);
+        }
       }, 1000);
     }
 
     return () => {
       clearInterval(intervalId);
-    }
-  }, [isRunning]);
+    };
+  }, [isRunning, selectedExercises, duration]);
 
   const handleStart = () => {
 
@@ -44,14 +49,21 @@ function TimerComponent({ selectedExercises }) {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
+  const currentExercise = selectedExercises[currentExerciseIndex];
+  const { name, image } = currentExercise;
+
+
+ 
+
   return (
     <div className="flex flex-col items-center justify-center bg-gray-200 p-20 rounded-lg">
       <h2 className="text-5xl text-center mb-4">Timer: {formatTime(duration)}</h2>
-      {selectedExercises.map((exercise) => (
-        <div key={exercise.id} className="exercise-container">
-          <h3>{exercise.name}</h3>
+      {selectedExercises.length > 0 && (
+        <div className="exercise-container">
+          <img className="w-50 h-50" src={image} alt={name} />
+          <h3 className='text-2xl text-center mb-3' >{name}</h3>
         </div>
-      ))}
+      )}
       <div className="flex justify-center">
         <button
           className="bg-red-300 hover:bg-red-400 text-white font-bold py-2 px-4 rounded mr-2"
