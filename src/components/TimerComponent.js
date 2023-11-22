@@ -1,43 +1,40 @@
 import React, { useState, useEffect } from 'react';
 
 function TimerComponent({ selectedExercises }) {
-  const [duration, setDuration] = useState(selectedExercises.length * 30); // Initial duration in seconds
-  const [timer, setTimer] = useState(null);
+ 
+  const [duration, setDuration] = useState(0)
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    const totalExerciseDuration = selectedExercises.length * 30;
-    setDuration(totalExerciseDuration);
+    let intervalId;
 
-    if (isRunning) {
-      setTimer(
-        setInterval(() => {
-          setDuration((prevDuration) => prevDuration - 1);
-        }, 1000)
-      );
-    } else {
-      clearInterval(timer);
+    if(isRunning){
+      intervalId = setInterval(() => {
+        setDuration((prevDuration) => prevDuration - 1);
+      }, 1000);
     }
 
     return () => {
-      clearInterval(timer);
-    };
-  }, [isRunning, selectedExercises]);
+      clearInterval(intervalId);
+    }
+  }, [isRunning]);
 
   const handleStart = () => {
+
+    const totalDuration = selectedExercises.length * 30;
+
+    setDuration(totalDuration)
+
     setIsRunning(true);
   };
 
   const handlePause = () => {
-    setIsRunning(false);
+    setIsRunning((prevState) => !prevState);
   };
 
   const handleReset = () => {
-    const totalExerciseDuration = selectedExercises.length * 30;
-    setDuration(totalExerciseDuration);
     setIsRunning(false);
-
-    clearInterval(timer); // Clear the interval when resetting the timer
+    setDuration(0);
   };
 
   const formatTime = (time) => {
@@ -66,7 +63,7 @@ function TimerComponent({ selectedExercises }) {
           className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded mr-2"
           onClick={handlePause}
         >
-          Pause
+          {!isRunning ? "Continue" : "Pause"}
         </button>
         <button
           className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded"
