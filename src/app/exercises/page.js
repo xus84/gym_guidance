@@ -1,83 +1,52 @@
-import React from 'react'
-
+"use client"
+import React, { useState } from 'react'
 import ExerciseCard from './ExerciseCard';
 import Header from '@/components/Header';
-
+import { exercises } from './ExerciseData';
 function Exercises() {
 
-  const exercises = [
-    {
-      id: 1,
-      name: 'Step Touch',
-      description: 'Step side to side, lightly tapping your foot to the side. A low-impact exercise to warm up and improve coordination.',
-      image: 'step-touch.jpg',
-    },
-    {
-      id: 2,
-      name: 'High Knees',
-      description: 'Jog in place while lifting your knees as high as possible. Great for cardiovascular fitness and leg strength.',
-      image: 'high-knees.jpg',
-    },
-    {
-      id: 3,
-      name: 'Butt Kicker',
-      description: 'Jog in place, kicking your heels up towards your glutes. Works on cardiovascular endurance and targets the hamstrings.',
-      image: 'butt-kicker.jpg',
-    },
-    {
-      id: 4,
-      name: 'Running in Place',
-      description: 'Simulate running while staying in one spot. Excellent for warming up or maintaining an elevated heart rate.',
-      image: 'running-in-place.jpg',
-    },
-    {
-      id: 5,
-      name: 'Front Kicks',
-      description: 'Alternate kicking your legs forward. This exercise engages the core, improves flexibility, and works the hip flexors.',
-      image: 'front-kicks.jpg',
-    },
-    {
-      id: 6,
-      name: 'Windmill',
-      description: 'Stand with feet shoulder-width apart, arms outstretched. Rotate your torso, reaching opposite hand towards opposite foot. Enhances flexibility and works the core.',
-      image: 'windmill.jpg',
-    },
-    {
-      id: 7,
-      name: 'Bend and Reach',
-      description: 'Stand with feet shoulder-width apart. Bend at the waist, reaching down towards your toes. A simple stretch that targets the lower back and hamstrings.',
-      image: 'bend-and-reach.jpg',
-    },
-    {
-      id: 8,
-      name: 'Calf Raises',
-      description: 'Lift your heels off the ground while standing. Strengthens the calf muscles and helps improve ankle stability.',
-      image: 'calf-raises.jpg',
-    },
-    {
-      id: 9,
-      name: 'Arm Circles',
-      description: 'Extend your arms to the sides and make circular motions with your hands. A warm-up exercise that improves shoulder flexibility and circulation.',
-      image: 'arm-circles.jpg',
-    },
-    {
-      id: 10,
-      name: 'Side Hops',
-      description: 'Hop from side to side, landing softly on the balls of your feet. Enhances agility, balance, and leg strength.',
-      image: 'side-hops.jpg',
-    },
-  ];
+  const [selectedExercises, setSelectedExercises] = useState([]);
+
+
+  const handleExerciseClick = (exercise) => {
+
+    setSelectedExercises((prevExercises) => {
+      const isAlreadySelected = prevExercises.some((selectedExercise) => selectedExercise.id === exercise.id);
+
+      if (!isAlreadySelected) {
+        return [...prevExercises, exercise];
+      } else {
+        return prevExercises.filter((e) => e.id !== exercise.id);
+      }
+    })
+  };
+
+
+
+
+  const selectedExercisesList = selectedExercises.map((exercise) => (
+    <p key={exercise.id}>{exercise.name}</p>
+  ))
 
 
   return (
     <div className="bg-red-200">
       <Header />
-      <div className="grid grid-cols-3 gap-4 p-4">
+      <div>
+        <h2 className='text-2xl font-bold mt-2 text-center'>Create your own routine and click the timer</h2>
+      </div>
+      <div className="grid grid-cols gap-4 p-3 md:grid-cols-5 sm:grid-cols-3">
         {exercises.map((exercise, index) => (
           <div key={index}>
-          <ExerciseCard  exercise={exercise}/>
+            <ExerciseCard exercise={exercise} onSelect={handleExerciseClick} />
           </div>
         ))}
+      </div>
+
+      <div className="mt-8 p-4">
+        <h2 className="text-2xl font-bold mb-4 text-center">Selected Exercises</h2>
+        <ul className="text-1xl font-semibold list-disc pl-8">{selectedExercisesList}
+        </ul>
       </div>
     </div>
   )
