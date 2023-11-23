@@ -8,17 +8,24 @@ function TimerComponent({ selectedExercises }) {
 
   useEffect(() => {
     let intervalId;
-
+  
     if (isRunning) {
       intervalId = setInterval(() => {
-        setDuration((prevDuration) => prevDuration - 1);
-
+        setDuration((prevDuration) => {
+          const newDuration = prevDuration - 1;
+          if (newDuration === 0) {
+            setIsRunning(false);
+            // Additional logic or actions when the timer reaches 00:00
+          }
+          return newDuration;
+        });
+  
         if (duration % 30 === 0) {
           setCurrentExerciseIndex((prevIndex) => (prevIndex + 1) % selectedExercises.length);
         }
       }, 1000);
     }
-
+  
     return () => {
       clearInterval(intervalId);
     };
