@@ -67,8 +67,12 @@ function TimerComponent({ selectedExercises }) {
       <h2 className="text-5xl text-center mb-4">Timer: {formatTime(duration)}</h2>
       {selectedExercises.length > 0 && (
         <div className="exercise-container">
-          <img className="w-50 h-50" src={image} alt={name} />
-          <h3 className='text-2xl text-center mb-3' >{name}</h3>
+          <div className='flex items-center justify-center'>
+          <img className='w-1/3 h-1/3' src={image} alt={name}/>
+          </div>
+          <div>
+          <h3 className='text-2xl text-center mb-3'>{name}</h3>
+          </div>
         </div>
       )}
       <div className="flex justify-center">
