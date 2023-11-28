@@ -10,18 +10,31 @@ function Exercises() {
   const [isConfirming, setIsConfirming] = useState(false);
 
   const handleExerciseClick = (exercise) => {
-
     setSelectedExercises((prevExercises) => {
-      const isAlreadySelected = prevExercises.some((selectedExercise) => selectedExercise.id === exercise.id);
-
-      if (!isAlreadySelected) {
+      const isAlreadySelected = prevExercises.some(
+        (selectedExercise) => selectedExercise.id === exercise.id
+      );
+  
+      if (isAlreadySelected) {
         return [...prevExercises, exercise];
       } else {
-        return prevExercises.filter((e) => e.id !== exercise.id);
+        return [...prevExercises, exercise];
       }
-    })
+    });
   };
+  
 
+
+  const handleDeleteExercise = (exercise) => {
+    setSelectedExercises((prevExercises) => {
+      const updatedExercises = [...prevExercises];
+      const index = updatedExercises.findIndex((e) => e.id === exercise.id);
+      if (index !== -1) {
+        updatedExercises.splice(index, 1);
+      }
+      return updatedExercises;
+    });
+  };
   
 
   const handleConfirmClick = () => {
@@ -32,7 +45,7 @@ function Exercises() {
   const selectedExercisesList = selectedExercises.map((exercise) => (
     <div key={exercise.id} className="inline-flex gap-20 bg-white m-4 p-4 rounded">
       <p>{exercise.name}</p>
-      <button onClick={() => handleExerciseClick(exercise)}>❌</button>
+      <button onClick={() => handleDeleteExercise(exercise)}>❌</button>
     </div>
   ))
 
