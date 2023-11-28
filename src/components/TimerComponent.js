@@ -5,31 +5,44 @@ function TimerComponent({ selectedExercises }) {
   const [duration, setDuration] = useState(0)
   const [isRunning, setIsRunning] = useState(false);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
+  const [initialExercise, setInitialExercise] = useState({
+    name: selectedExercises[0]?.name,
+    image: selectedExercises[0]?.image
+  });
 
   useEffect(() => {
     let intervalId;
-  
+    let elapsedTime = 0;
+
     if (isRunning) {
       intervalId = setInterval(() => {
         setDuration((prevDuration) => {
           const newDuration = prevDuration - 1;
+          elapsedTime += 1;
+
           if (newDuration === 0) {
             setIsRunning(false);
-            // Additional logic or actions when the timer reaches 00:00
           }
+
+          if (elapsedTime === 60) {
+            setCurrentExerciseIndex((prevIndex) =>
+              (prevIndex + 1) % selectedExercises.length
+            );
+            elapsedTime = 0; 
+          }
+
           return newDuration;
         });
-  
-        if (duration % 30 === 0) {
-          setCurrentExerciseIndex((prevIndex) => (prevIndex + 1) % selectedExercises.length);
-        }
       }, 1000);
     }
-  
+
     return () => {
       clearInterval(intervalId);
     };
-  }, [isRunning, selectedExercises, duration]);
+  }, [isRunning, selectedExercises]);
+  
+  
+  
 
   const handleStart = () => {
 
@@ -45,8 +58,13 @@ function TimerComponent({ selectedExercises }) {
   };
 
   const handleReset = () => {
+    setCurrentExerciseIndex(0);
     setIsRunning(false);
     setDuration(0);
+    setInitialExercise({
+      name: selectedExercises[0]?.name,
+      image: selectedExercises[0]?.image,
+    });
   };
 
   const formatTime = (time) => {
@@ -58,9 +76,7 @@ function TimerComponent({ selectedExercises }) {
 
   const currentExercise = selectedExercises[currentExerciseIndex];
   const { name, image } = currentExercise;
-
-
- 
+  const exercise = selectedExercises[currentExerciseIndex] || initialExercise ;
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-200 p-20 rounded-lg">
