@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import { exercises } from './ExerciseData';
 import TimerComponent from '@/components/TimerComponent';
 function Exercises() {
-  
+
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [isConfirming, setIsConfirming] = useState(false);
 
@@ -14,7 +14,7 @@ function Exercises() {
       const isAlreadySelected = prevExercises.some(
         (selectedExercise) => selectedExercise.id === exercise.id
       );
-  
+
       if (isAlreadySelected) {
         return [...prevExercises, exercise];
       } else {
@@ -22,7 +22,7 @@ function Exercises() {
       }
     });
   };
-  
+
 
 
   const handleDeleteExercise = (exercise) => {
@@ -35,7 +35,7 @@ function Exercises() {
       return updatedExercises;
     });
   };
-  
+
 
   const handleConfirmClick = () => {
     setIsConfirming(!isConfirming);
@@ -56,26 +56,25 @@ function Exercises() {
       <div>
         <h2 className='text-2xl font-bold mt-5 mb-5 text-center'>Create your own routine and click the timer</h2>
       </div>
-      {!isConfirming ? (
-         <div className="grid grid-cols gap-4 p-3 md:grid-cols-5 sm:grid-cols-3">
-         {exercises.map((exercise, index) => (
-           <div key={index}>
-             <ExerciseCard exercise={exercise} onSelect={handleExerciseClick} selectedExercises={selectedExercises}/>
-           </div>
-         ))}
-       </div>
-      ) : (
-        <TimerComponent selectedExercises={selectedExercises} />
-      )}
-     
       <div className="mt-8 p-4">
-        <h2 className="text-2xl font-bold mb-4 text-center">Selected Exercises</h2>
+        <h2 className="text-1xl font-bold mb-4 text-center">Selected Exercises</h2>
         <ul className="text-1xl font-semibold list-disc pl-8">{selectedExercisesList}
         </ul>
         <div className='flex justify-center'>
-        <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' onClick={handleConfirmClick}>{isConfirming ? 'Cancel' : 'Confirm'}</button>
+          <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' onClick={handleConfirmClick}>{isConfirming ? 'Cancel' : 'Confirm'}</button>
         </div>
       </div>
+      {!isConfirming ? (
+        <div className="grid grid-cols gap-4 p-3 md:grid-cols-5 sm:grid-cols-3">
+          {exercises.map((exercise, index) => (
+            <div key={index}>
+              <ExerciseCard exercise={exercise} onSelect={handleExerciseClick} selectedExercises={selectedExercises} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <TimerComponent selectedExercises={selectedExercises} />
+      )}
     </div>
   )
 }
