@@ -19,15 +19,11 @@ function Exercises() {
 
 
   const handleDeleteExercise = (exercise) => {
-    setSelectedExercises((prevExercises) => {
-      const updatedExercises = [...prevExercises];
-      const index = updatedExercises.findIndex((e) => e.id === exercise.id);
-      if (index !== -1) {
-        updatedExercises.splice(index, 1);
-      }
-      return updatedExercises;
-    });
+    setSelectedExercises((prevExercises) =>
+      prevExercises.filter((e) => e.id !== exercise.id)
+    );
   };
+  
 
 
   const handleConfirmClick = () => {
