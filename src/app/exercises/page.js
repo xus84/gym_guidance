@@ -4,6 +4,7 @@ import ExerciseCard from './ExerciseCard';
 import Header from '@/components/Header';
 import { exercises } from './ExerciseData';
 import TimerComponent from '@/components/TimerComponent';
+
 function Exercises() {
 
   const [selectedExercises, setSelectedExercises] = useState([]);
@@ -11,15 +12,7 @@ function Exercises() {
 
   const handleExerciseClick = (exercise) => {
     setSelectedExercises((prevExercises) => {
-      const isAlreadySelected = prevExercises.some(
-        (selectedExercise) => selectedExercise.id === exercise.id
-      );
-
-      if (isAlreadySelected) {
         return [...prevExercises, exercise];
-      } else {
-        return [...prevExercises, exercise];
-      }
     });
   };
 
