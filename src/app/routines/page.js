@@ -11,29 +11,16 @@ function Routine() {
 
   const handleExerciseClick = (exercise) => {
     setSelectedExercises((prevExercises) => {
-      const isAlreadySelected = prevExercises.some(
-        (selectedExercise) => selectedExercise.id === exercise.id
-      );
-  
-      if (isAlreadySelected) {
         return [...prevExercises, exercise];
-      } else {
-        return [...prevExercises, exercise];
-      }
     });
   };
   
 
 
   const handleDeleteExercise = (exercise) => {
-    setSelectedExercises((prevExercises) => {
-      const updatedExercises = [...prevExercises];
-      const index = updatedExercises.findIndex((e) => e.id === exercise.id);
-      if (index !== -1) {
-        updatedExercises.splice(index, 1);
-      }
-      return updatedExercises;
-    });
+    setSelectedExercises((prevExercises) => 
+      prevExercises.filter((e) => e.id !== exercise.id)
+    );
   };
   
 
@@ -56,6 +43,16 @@ function Routine() {
       <div>
         <h2 className='text-2xl font-bold mt-5 mb-5 text-center'>Create your own routine and click the timer</h2>
       </div>
+
+      <div className="mt-8 p-4">
+        <h2 className="text-2xl font-bold mb-4 text-center">Selected Exercises</h2>
+        <ul className="text-1xl font-semibold list-disc pl-8">{selectedExercisesList}
+        </ul>
+        <div className='flex justify-center'>
+        <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' onClick={handleConfirmClick}>{isConfirming ? 'Cancel' : 'Confirm'}</button>
+        </div>
+      </div>
+
       {!isConfirming ? (
          <div className="grid grid-cols gap-4 p-3 md:grid-cols-5 sm:grid-cols-3">
          {exercises.map((exercise, index) => (
@@ -66,16 +63,7 @@ function Routine() {
        </div>
       ) : (
         <TimerComponent selectedExercises={selectedExercises} />
-      )}
-     
-      <div className="mt-8 p-4">
-        <h2 className="text-2xl font-bold mb-4 text-center">Selected Exercises</h2>
-        <ul className="text-1xl font-semibold list-disc pl-8">{selectedExercisesList}
-        </ul>
-        <div className='flex justify-center'>
-        <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' onClick={handleConfirmClick}>{isConfirming ? 'Cancel' : 'Confirm'}</button>
-        </div>
-      </div>
+      )} 
     </div>
   )
 }
