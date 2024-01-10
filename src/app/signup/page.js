@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 export default function SignUp() {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -12,11 +13,21 @@ export default function SignUp() {
     e.preventDefault();
      
     try { 
-    const res = await axios.post('/api/auth/register', { email, password })
-    console.log(res)
-    } catch (error) {
+    const signupResponse = await axios.post('/api/auth/register', { email, password })
+    console.log(signupResponse)
+
+      const res = await signIn('credentials', { 
+        email: signupResponse.data.email,
+        password: password,
+        redirect: false,
+      }); 
+
+      if (res?.ok) return router.push('/dashboard');
+
+        console.log(res)
+      } catch (error) {
       console.log(error);
-    }
+      }
   };
 
   const handleEmailChange = (e) => {
