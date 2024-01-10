@@ -19,7 +19,7 @@ export default function Login() {
 
     if(res?.error) return setError(res.error);
 
-    if(res?.ok) return router.push('/dashboard');
+    if(res?.ok) return router.push('/dashboard/profile');
 
   } 
   catch (error) {

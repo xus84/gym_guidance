@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getServerSession } from "next-auth";
 
 const Header = () => {
+  const session = getServerSession();
+
   return (
     <header className="bg-gray-300 p-4 text-white">
       <div className="container mx-auto flex justify-between items-center">
@@ -12,8 +15,16 @@ const Header = () => {
             <Link href={"/"} className="hover:underline">Home</Link>
             <Link href={"/routines"} className="hover:underline">Routines</Link>
             <Link href={"/exercises"} className="hover:underline">Exercises</Link>
-            <Link href={"/signup"} className="hover:underline">Sign Up</Link>
-            <Link href={"/login"} className="hover:underline">Login</Link>
+             {!session ? (
+              <>
+                <Link href={"/dashboard/profile"} className="hover:underline">Profile</Link>
+              </>
+            ) : (
+              <>
+                <Link href={"/signup"} className="hover:underline">Sign Up</Link>
+                <Link href={"/login"} className="hover:underline">Login</Link>
+              </>
+            )}
           </ul>
         </nav>
       </div>
