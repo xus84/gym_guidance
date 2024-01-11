@@ -1,8 +1,13 @@
+"use client"
 import Link from "next/link";
-import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 
-const Header = () => {
-  const session = getServerSession();
+function Header() {
+
+  const { data: session } = useSession();
+
+  // Check if the user is authenticated
+  const isAuthenticated = session?.user;
 
   return (
     <header className="bg-gray-300 p-4 text-white">
@@ -15,7 +20,9 @@ const Header = () => {
             <Link href={"/"} className="hover:underline">Home</Link>
             <Link href={"/routines"} className="hover:underline">Routines</Link>
             <Link href={"/exercises"} className="hover:underline">Exercises</Link>
-             {!session ? (
+
+            {/* Conditionally render links based on authentication status */}
+            {isAuthenticated ? (
               <>
                 <Link href={"/dashboard/profile"} className="hover:underline">Profile</Link>
               </>
@@ -25,6 +32,7 @@ const Header = () => {
                 <Link href={"/login"} className="hover:underline">Login</Link>
               </>
             )}
+
           </ul>
         </nav>
       </div>
