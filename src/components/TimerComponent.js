@@ -79,7 +79,7 @@ function TimerComponent({ selectedExercises }) {
   const exercise = selectedExercises[currentExerciseIndex] || initialExercise ;
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-200 p-20 rounded-lg">
+    <div className="flex flex-col items-center justify-center bg-gray-200 p-5 rounded-lg">
       <h2 className="text-5xl text-center mb-4">Timer: {formatTime(duration)}</h2>
       {selectedExercises.length > 0 && (
         <div className="exercise-container">
