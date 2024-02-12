@@ -1,0 +1,136 @@
+export const exercises = [
+  {
+    id: 1,
+    name: 'Rest 30 seconds',
+    description: 'Take a little break and rest for 30 seconds.',
+    image: './img/exercises/pexels-photo-1056251.jpeg',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Rest',
+      details: 'Rest exercises are crucial for recovery. During this time, focus on controlled breathing and allow your heart rate to decrease. Use this break to prepare mentally for the next set of exercises. Avoid intense movements and use the time to relax and rejuvenate.',
+    },
+  },
+  {
+    id: 2,
+    name: 'Step Touch',
+    description: 'Step side to side, lightly tapping your foot to the side.',
+    image: './img/exercises/step_touch.jpg',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Cardio',
+      details: 'Cardio exercises, like Step Touch, elevate your heart rate, promoting cardiovascular health. This low-impact exercise is effective for warming up your body and improving coordination. Engage your core and keep a brisk but controlled pace during this cardio workout.',
+    },
+  },
+  {
+    id: 3,
+    name: 'High Knees',
+    description: 'Jog in place while lifting your knees as high as possible.',
+    image: './img/exercises/istockphoto-1308230934-612x612.jpg',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Cardio',
+      details: 'High Knees are an excellent cardio exercise that not only boosts your heart rate but also engages your leg muscles. Focus on lifting your knees as high as comfortable and maintaining a consistent jogging rhythm. This exercise enhances endurance and lower body strength.',
+    },
+  },
+  {
+    id: 4,
+    name: 'Butt Kicker',
+    description: 'Jog in place, kicking your heels up towards your glutes.',
+    image: './img/exercises/lyteCache.jpeg',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Cardio',
+      details: 'Butt Kicker is a dynamic cardio exercise that targets your hamstrings and glutes. Jog in place while kicking your heels towards your glutes with each step. Maintain a steady pace and focus on the kicking motion to engage your lower body muscles.',
+    },
+  },
+  {
+    id: 5,
+    name: 'Running in Place',
+    description: 'Simulate running while staying in one spot.',
+    image: './img/exercises/OIG.jpeg',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Cardio',
+      details: 'Running in Place is a classic cardio exercise that mimics the motion of running. Lift your knees and swing your arms to simulate running while staying in one spot. This exercise elevates your heart rate, improves endurance, and warms up your entire body.',
+    },
+  },
+  {
+    id: 6,
+    name: 'Front Kicks',
+    description: 'Alternate kicking your legs forward.',
+    image: './img/exercises/OIG1.jpeg',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Cardio',
+      details: 'Front Kicks are a cardio exercise that engages your core and lower body. Stand in place and alternate kicking your legs forward. Focus on controlled kicks and maintain a steady pace. This exercise helps improve flexibility and strengthens your leg muscles.',
+    },
+  },
+  {
+    id: 7,
+    name: 'Windmill',
+    description: 'Stand with feet shoulder-width apart, arms outstretched.',
+    image: './img/exercises/windmill.png',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Stretching',
+      details: 'Windmill is a stretching exercise that targets the muscles in your shoulders, back, and hamstrings. Stand with feet shoulder-width apart, extend your arms out to the sides, and hinge at the waist to reach down toward the opposite foot. This exercise improves flexibility and mobility.',
+    },
+  },
+  {
+    id: 8,
+    name: 'Bend and Reach',
+    description: 'Stand with feet shoulder-width apart. Bend at the waist, reaching down towards your toes.',
+    image: './img/exercises/bend&reach.png',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Stretching',
+      details: 'Bend and Reach is a stretching exercise that focuses on the hamstrings and lower back. Stand with feet shoulder-width apart, bend at the waist, and reach down towards your toes. This movement helps improve flexibility in the lower back and enhances hamstring flexibility.',
+    },
+  },
+  {
+    id: 9,
+    name: 'Calf Raises',
+    description: 'Lift your heels off the ground while standing.',
+    image: './img/exercises/raises.png',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Strength',
+      details: 'Calf Raises are a strength exercise targeting the muscles in your calves. Stand with feet hip-width apart, lift your heels off the ground, and then lower them back down. This exercise helps strengthen the calf muscles and improves ankle stability.',
+    },
+  },
+  {
+    id: 10,
+    name: 'Arm Circles',
+    description: 'Extend your arms to the sides and make circular motions with your hands.',
+    image: './img/exercises/3468.jpg',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Stretching',
+      details: 'Arm Circles are a stretching exercise that warms up the shoulder joints and improves flexibility in the arms. Extend your arms to the sides and make circular motions with your hands. This exercise is beneficial for enhancing shoulder mobility and preventing stiffness.',
+    },
+  },
+  {
+    id: 11,
+    name: 'Side Hops',
+    description: 'Hop from side to side, landing softly on the balls of your feet.',
+    image: './img/exercises/side_hops.png',
+    width: '150px',
+    height: '140px',
+    exerciseType: {
+      name: 'Cardio',
+      details: 'Side Hops are a dynamic cardio exercise that involves hopping from side to side. Land softly on the balls of your feet to minimize impact. This exercise improves agility, strengthens leg muscles, and enhances overall cardiovascular fitness.',
+    },
+  },
+];
+
+
