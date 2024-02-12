@@ -1,6 +1,7 @@
 import { Lato } from 'next/font/google'
 import Head from 'next/head';
 import './globals.css'
+import Providers from './Providers'
 
 const lato = Lato({ subsets: [], weight: ['400', '700'] })
 
@@ -21,7 +22,11 @@ export default function RootLayout({ children }) {
       <Head>
         <link rel="icon" href="/favicon.ico" sizes='any' />
       </Head>
-      <body className={lato.className}>{children}</body>
+      <body className={lato.className}>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }
