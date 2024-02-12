@@ -1,73 +1,24 @@
 "use client"
-import React, { useState } from 'react'
-import ExerciseCard from './ExerciseCard';
 import Header from '@/components/Header';
 import { exercises } from '../routines/ExerciseData';
-import TimerComponent from '@/components/TimerComponent';
 
-function Routine() {
-
-  const [selectedExercises, setSelectedExercises] = useState([]);
-  const [isConfirming, setIsConfirming] = useState(false);
-
-  const handleExerciseClick = (exercise) => {
-    setSelectedExercises((prevExercises) => {
-        return [...prevExercises, exercise];
-    });
-  };
-
-
-
-  const handleDeleteExercise = (exercise) => {
-    setSelectedExercises((prevExercises) =>
-      prevExercises.filter((e) => e.id !== exercise.id)
-    );
-  };
-  
-
-
-  const handleConfirmClick = () => {
-    setIsConfirming(!isConfirming);
-  };
-
-
-  const selectedExercisesList = selectedExercises.map((exercise) => (
-    <div key={exercise.id} className="inline-flex gap-20 bg-white m-4 p-4 rounded">
-      <p>{exercise.name}</p>
-      <button onClick={() => handleDeleteExercise(exercise)}>❌</button>
-    </div>
-  ))
-
-
-
+function Exercises() {
   return (
-    <div className="bg-red-200">
+    <>
       <Header />
-      <div>
-        <h2 className='text-2xl font-bold mt-5 mb-5 text-center'>Create your own routine and click the timer</h2>
-      </div>
-      <div className="mt-8 p-4">
-        <h2 className="text-1xl font-bold mb-4 text-center">Selected Exercises</h2>
-        <ul className="text-1xl font-semibold list-disc pl-8">{selectedExercisesList}
-        </ul>
-        <div className='flex justify-center'>
-          <button className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' onClick={handleConfirmClick}>{isConfirming ? 'Cancel' : 'Confirm'}</button>
-        </div>
-
-      </div>
-      {!isConfirming ? (
-        <div className="grid grid-cols gap-4 p-3 md:grid-cols-5 sm:grid-cols-3">
-          {exercises.map((exercise, index) => (
-            <div key={index}>
-              <ExerciseCard exercise={exercise} onSelect={handleExerciseClick} selectedExercises={selectedExercises} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-red-200">
+        {exercises.map((exercise) => (
+          <div key={exercise.id} className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div key={exercise.id} className="border rounded-lg p-4 mb-2">
+              <img src={exercise.image} alt={exercise.name} className="w-32 h-32 object-cover mx-auto" />
+              <h3 className="text-lg font-bold mt-4">{exercise.name}</h3>
+              <p className="mt-2">{exercise.description}</p>
             </div>
-          ))}
-        </div>
-      ) : (
-        <TimerComponent selectedExercises={selectedExercises} />
-      )}
-    </div>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 
-export default Routine
+export default Exercises;
