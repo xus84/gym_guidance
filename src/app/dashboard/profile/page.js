@@ -5,23 +5,15 @@ import { useSession, signOut} from 'next-auth/react';
 function Profile() {
 
     const { data: session, status } = useSession();
-
+    const userEmail = session?.user?.email;
+    const userName = userEmail ? userEmail.split('@')[0] : '';
     console.log(session, status)
     
   return (
     <div>
       <Header/>
-      <h1>Profile</h1>
       <div className='flex flex-col justify-center items-center h-screen bg-red-200'>
-      <pre>
-        {JSON.stringify({
-          session,
-          status,
-        },
-        null,
-        2
-        )}
-      </pre>
+      <p className="text-xl mb-2">Welcome, {userName}</p>
       <button
       className="w-1/3 bg-gray-300 text-white font-bold py-2 px-4 rounded"
       onClick={() => signOut()}>Logout</button>
