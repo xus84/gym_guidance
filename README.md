@@ -2,6 +2,9 @@
 
 A comprehensive fitness application built with Next.js, offering user signup, login, and dashboard functionalities. This application is designed to facilitate user registration, authentication, and personalized dashboard access, utilizing MongoDB for data storage and management.
 
+![gym_guidance](https://github.com/xus84/gym_guidance/assets/62716876/a4f932f1-09da-4172-a083-4c2acacc8dd9)
+
+
 ## Features
 
 - **User Signup**: Allows users to register by providing necessary details.
